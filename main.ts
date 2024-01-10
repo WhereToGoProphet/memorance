@@ -1,7 +1,7 @@
 namespace SpriteKind {
     export const Button = SpriteKind.create()
 }
-// Mostly for controlling Main Menu
+// Mostly for controlling Main Menu and stages
 function StageControl () {
     if (Stages == 0) {
         scene.setBackgroundImage(assets.image`Title Name`)
@@ -44,6 +44,7 @@ function StageControl () {
         sprites.destroy(Tutorial)
     }
 }
+// "Occurence" random events either good or bad
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite, location) {
     Occurence = [
     0,
@@ -54,6 +55,8 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sp
     ]
     game.gameOver(true)
 })
+// Stages, Scenery, and Dialogue
+// 
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Button, function (sprite, otherSprite) {
     if (otherSprite == Play && controller.A.isPressed()) {
         Stages = 1
@@ -344,6 +347,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Button, function (sprite, otherS
         scene.cameraFollowSprite(MAIN_CHAR)
     }
 })
+// "Conflict" similar to pokemon in which you fight with the sprites
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
     game.gameOver(false)
 })
